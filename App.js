@@ -12,6 +12,8 @@ import useLinking from './navigation/useLinking';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 
+import PredictionScreen from './screens/PredictionScreen';
+
 const Stack = createStackNavigator();
 
 export default function App(props) {
@@ -67,9 +69,28 @@ export default function App(props) {
           initialState={initialNavigationState}
         >
           <Stack.Navigator>
+            {/* <Stack.Screen
+              name='InitialScreen'
+              component={InitialScreen}
+              options={{
+                headerTintColor: '#1D446F',
+                title: ''
+              }}
+            /> */}
+
             <Stack.Screen
               name='Home'
               component={BottomTabNavigator}
+              options={{
+                headerTintColor: '#1D446F',
+                title: '',
+                headerTransparent: 'true'
+              }}
+            />
+
+            <Stack.Screen
+              name='PredictionScreen'
+              component={PredictionScreen}
               options={{
                 headerTintColor: '#1D446F',
                 title: '',

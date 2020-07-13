@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  StatusBar,
+  TouchableOpacity
+} from 'react-native';
 
 class Home extends Component {
   render() {
@@ -42,9 +49,15 @@ class Home extends Component {
                   ></Image>
                 </View>
                 <View style={styles.rect5Stack}>
-                  <View style={styles.rect5}>
+                  <TouchableOpacity
+                    style={styles.rect5}
+                    onPress={() => {
+                      this.props.navigation.navigate('PredictionScreen');
+                    }}
+                  >
                     <Text style={styles.takeAPicture}>Take a Picture</Text>
-                  </View>
+                  </TouchableOpacity>
+
                   <Image
                     source={require('../assets/images/photography.png')}
                     resizeMode='contain'

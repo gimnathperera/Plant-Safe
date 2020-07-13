@@ -30,7 +30,7 @@ export default function CustomerBottomTabNavigator({ navigation, route }) {
       />
 
       <BottomTab.Screen
-        name='QA'
+        name='Diseases'
         component={DiseaseListScreen}
         options={{
           tabBarLabel: ({ focused }) => (
@@ -64,9 +64,9 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return '';
-    case 'QA':
-      return '';
+    case 'Diseases':
+      return 'Plant Diseases';
     case 'Profile':
-      return '';
+      return 'Account';
   }
 }
