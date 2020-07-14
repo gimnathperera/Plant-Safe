@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  StatusBar,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar animated backgroundColor='white' barStyle='dark-content' />
         <View style={styles.rect2StackStack}>
           <View style={styles.rect2Stack}>
             <View style={styles.rect2}></View>

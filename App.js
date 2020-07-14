@@ -13,6 +13,7 @@ import useLinking from './navigation/useLinking';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 
 import PredictionScreen from './screens/PredictionScreen';
+import InitialScreen from './screens/InitialScreen';
 
 const Stack = createStackNavigator();
 
@@ -64,19 +65,26 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+        <StatusBar
+          animated={true}
+          backgroundColor='#1A8766'
+          barStyle='dark-content'
+          hidden={false}
+        ></StatusBar>
         <NavigationContainer
           ref={containerRef}
           initialState={initialNavigationState}
         >
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name='InitialScreen'
               component={InitialScreen}
               options={{
                 headerTintColor: '#1D446F',
-                title: ''
+                title: '',
+                headerTransparent: 'true'
               }}
-            /> */}
+            />
 
             <Stack.Screen
               name='Home'
