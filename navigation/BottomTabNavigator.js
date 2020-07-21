@@ -67,6 +67,6 @@ function getHeaderTitle(route) {
     case 'Diseases':
       return '';
     case 'Profile':
-      return 'Account';
+      return '';
   }
 }
