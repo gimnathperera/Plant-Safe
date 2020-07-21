@@ -91,7 +91,7 @@ class Home extends Component {
             ></Image>
 
             <Image
-              source={require('../assets/images/logo1.png')}
+              source={require('../assets/images/logomain.png')}
               resizeMode='contain'
               style={styles.image10}
             ></Image>
@@ -360,11 +360,11 @@ const styles = StyleSheet.create({
     fontSize: 13
   },
   image10: {
-    top: -20,
+    top: 10,
     bottom: 20,
     left: 0,
-    width: 122,
-    height: 150,
+    width: 74,
+    height: 74,
     position: 'absolute'
   },
   rect2Stack: {

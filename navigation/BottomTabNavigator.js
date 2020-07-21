@@ -65,7 +65,7 @@ function getHeaderTitle(route) {
     case 'Home':
       return '';
     case 'Diseases':
-      return 'Plant Diseases';
+      return '';
     case 'Profile':
       return 'Account';
   }

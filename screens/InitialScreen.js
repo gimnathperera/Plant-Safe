@@ -5,12 +5,18 @@ import Onboarding from 'react-native-onboarding-swiper';
 
 class InitialScreen extends Component {
   onSkip = () => {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('LoginScreen');
   };
 
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar
+          animated={true}
+          backgroundColor='#1A8766'
+          barStyle='dark-content'
+          hidden={false}
+        ></StatusBar>
         <Onboarding
           pages={[
             {

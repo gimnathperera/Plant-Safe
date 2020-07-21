@@ -5,16 +5,91 @@ import {
   Text,
   View,
   Image,
-  ImageBackground,
+  FlatList,
   TouchableOpacity
 } from 'react-native';
-import { Icon } from 'native-base';
+
+const DATA = [
+  { id: 1, name: 'Alder', species: 'Alnus' },
+  {
+    id: 2,
+    name: 'Black alder',
+    species: 'Alnus glutinosa, Ilex verticillata'
+  },
+  { id: 3, name: 'Common alder', species: 'Alnus glutinosa' },
+  { id: 4, name: 'False alder', species: 'Ilex verticillata' },
+  { id: 5, name: 'Gray alder', species: 'Alnus incana' }
+];
 
 class DiseaseListScreen extends Component {
+  renderPlantDisease = (plant) => {
+    console.log('DiseaseListScreen -> renderPlantDisease -> plant', plant);
+    return (
+      <TouchableOpacity
+        style={styles.rect3}
+        onPress={() => {
+          this.props.navigation.navigate('DetailedScreen');
+        }}
+      >
+        <View style={styles.rect6Row}>
+          <View style={styles.rect6}>
+            <Image
+              source={require('../assets/images/potato.png')}
+              resizeMode='cover'
+              style={styles.plantImage}
+            ></Image>
+          </View>
+          <View style={styles.potatoEralyBrightColumn}>
+            <Text style={styles.potatoEralyBright}>Potato Eraly Bright</Text>
+            <Text style={styles.mangoAppleOrange}>Mango, Apple, Orange</Text>
+            <Text style={styles.fungens}>Fungens</Text>
+          </View>
+          <Image
+            source={require('../assets/images/next.png')}
+            resizeMode='contain'
+            style={styles.image4}
+          ></Image>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>DiseaseList Screen</Text>
+        <View style={styles.rect2Stack}>
+          <View style={styles.rect2}></View>
+
+          <FlatList
+            data={DATA}
+            contentContainerStyle={{
+              paddingBottom: 100
+            }}
+            renderItem={this.renderPlantDisease}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+        <View style={styles.image3Stack}>
+          <Image
+            source={require('../assets/images/blob1.png')}
+            resizeMode='contain'
+            style={styles.image3}
+          ></Image>
+          <View style={styles.rect}>
+            <View style={styles.otherColumnRow}>
+              <View style={styles.otherColumn}>
+                <Text style={styles.other}>Other</Text>
+                <Text style={styles.pestsDiseases}>Pests &amp; Diseases</Text>
+              </View>
+              <Image
+                source={require('../assets/images/agriculture.png')}
+                resizeMode='contain'
+                style={styles.image2}
+              ></Image>
+            </View>
+            <Text style={styles.loremIpsum}>Browse throgh plant diseases.</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -25,265 +100,184 @@ export default DiseaseListScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#fff'
   },
-  image: {
-    top: 0,
-    left: 252,
-    width: 336,
-    height: 320,
-    position: 'absolute'
-  },
-  image1: {
-    top: 283,
-    left: 0,
-    width: 466,
-    height: 500,
-    position: 'absolute'
-  },
-  image1_imageStyle: {},
   rect2: {
-    width: 289,
-    height: 300,
-    marginTop: 20,
-    marginLeft: 155
+    top: 0,
+    left: 0,
+    width: 230,
+    height: 453,
+    position: 'absolute',
+    backgroundColor: '#5BB59B',
+    borderRadius: 27
   },
   rect3: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
+    top: 15,
+    left: 120,
+    width: 323,
+    height: 99,
+    backgroundColor: 'white',
+
+    borderRadius: 27,
     shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
-    flexDirection: 'row',
-    marginTop: 56,
-    marginLeft: 28
-  },
-  image4: {
-    width: 38,
-    height: 46
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    marginTop: 20,
+    shadowRadius: 10
   },
   rect6: {
-    top: 0,
-    left: 115,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute'
+    width: 97,
+    height: 76,
+    backgroundColor: 'green',
+    borderRadius: 12
   },
-  loremIpsum: {
-    top: 6,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneueregular'
+  plantImage: {
+    borderRadius: 12,
+    width: 97,
+    height: 76
   },
-  rect6Stack: {
-    width: 155,
-    height: 38,
-    marginLeft: 20,
-    marginTop: 7
+  potatoEralyBright: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    bottom: 7
   },
-  image4Row: {
-    height: 46,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 11,
-    marginLeft: 13,
-    marginTop: 6
+  mangoAppleOrange: {
+    fontFamily: 'comicneueregular',
+    color: '#121212',
+    bottom: 3,
+    marginLeft: 1
   },
-  rect4: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
-    flexDirection: 'row',
-    marginTop: 39,
-    marginLeft: 28
+  fungens: {
+    fontFamily: 'comicneueregular',
+    color: '#121212',
+    marginTop: 14,
+    marginLeft: 2
   },
-  image5: {
-    width: 39,
-    height: 41
+  potatoEralyBrightColumn: {
+    width: 137,
+    marginLeft: 17,
+    marginTop: 10,
+    marginBottom: 2
   },
-  rect7: {
-    top: 0,
-    left: 114,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute'
-  },
-  reportAProblem: {
-    top: 5,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneueregular'
-  },
-  rect7Stack: {
-    width: 154,
-    height: 38,
-    marginLeft: 21,
-    marginTop: 3
-  },
-  image5Row: {
-    height: 41,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 11,
-    marginLeft: 12,
+  image4: {
+    width: 29,
+    height: 58,
+    marginLeft: 17,
     marginTop: 10
   },
-  rect5: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
+  rect6Row: {
+    height: 76,
     flexDirection: 'row',
-    marginTop: 38,
-    marginLeft: 29
+    marginTop: 11,
+    marginLeft: 13,
+    marginRight: 13
   },
-  image6: {
-    width: 33,
-    height: 46
+  rect4: {
+    top: 143,
+    left: 135,
+    width: 308,
+    height: 99,
+    position: 'absolute',
+    backgroundColor: 'white',
+    borderRadius: 27,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
   },
-  rect8: {
+  rect5: {
+    top: 268,
+    left: 135,
+    width: 308,
+    height: 99,
+    position: 'absolute',
+    backgroundColor: 'white',
+    borderRadius: 27,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
+  },
+  rect2Stack: {
+    width: 450,
+    height: 453,
+    marginTop: 230,
+    marginLeft: -109
+  },
+  image3: {
     top: 0,
-    left: 116,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
+    left: 17,
+    width: 490,
+    height: 287,
     position: 'absolute'
   },
-  logout: {
-    top: 5,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
+  rect: {
+    top: 111,
+    width: 293,
+    height: 114,
     position: 'absolute',
-    fontFamily: 'comicneueregular'
-  },
-  rect8Stack: {
-    width: 156,
-    height: 38,
-    marginLeft: 18,
-    marginTop: 6
-  },
-  image6Row: {
-    height: 46,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 12,
-    marginLeft: 18,
-    marginTop: 7
-  },
-  rect1: {
-    top: 165,
-    left: 167,
-    width: 265,
-    height: 123,
-    backgroundColor: 'rgba(255,255,255,1)',
-    position: 'absolute',
-    elevation: 6,
+    backgroundColor: 'white',
     borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
+    left: 0,
     shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible'
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
+  },
+  other: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    fontSize: 18,
+    marginTop: -1
+  },
+  pestsDiseases: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    marginTop: 5
+  },
+  otherColumn: {
+    width: 107,
+    marginBottom: 21
   },
   image2: {
-    top: 10,
-    left: -7,
-    width: 120,
-    height: 113,
-    position: 'absolute'
+    width: 71,
+    height: 63,
+    marginLeft: 47,
+    marginTop: 1
   },
-  image2_imageStyle: {},
-  image3: {
-    width: 76,
-    height: 47,
-    marginTop: 25,
-    marginLeft: 22
+  otherColumnRow: {
+    height: 64,
+    flexDirection: 'row',
+    marginTop: 16,
+    marginLeft: 44,
+    marginRight: 24
   },
-  useremaEmailCom1: {
-    top: 22,
-    left: 114,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneuebold'
+  loremIpsum: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    marginTop: 4,
+    marginLeft: 44
   },
-  useremaEmailCom2: {
-    top: 45,
-    left: 114,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneuebold'
-  },
-  useremaEmailCom3: {
-    top: 77,
-    left: 114,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneuebold'
-  },
-  image2Stack: {
-    width: 250,
-    height: 113,
-    marginTop: 5,
-    marginLeft: 6
-  },
-  imageStack: {
-    width: 588,
-    height: 783,
-    marginTop: -72,
-    marginLeft: -119
-  },
-  heart: {
-    top: 67,
-    left: 200,
-    width: 41,
-    height: 46,
-    position: 'absolute'
-  },
-  icon: {
-    color: '#1D446F',
-    fontSize: 38
+  image3Stack: {
+    width: 507,
+    height: 287,
+    marginTop: -754,
+    marginLeft: 33
   }
 });
