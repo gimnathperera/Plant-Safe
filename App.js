@@ -13,6 +13,11 @@ import useLinking from './navigation/useLinking';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 
 import PredictionScreen from './screens/PredictionScreen';
+// import InitialScreen from './screens/InitialScreen';
+import FormLogin from './components/forms/FormLogin';
+import FormRegister from './components/forms/FormRegister';
+import InitialScreen from './screens/InitialScreen';
+import DetailedScreen from './screens/DiseaseDetailedScreen';
 
 const Stack = createStackNavigator();
 
@@ -64,23 +69,15 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+
         <NavigationContainer
           ref={containerRef}
           initialState={initialNavigationState}
         >
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name='InitialScreen'
               component={InitialScreen}
-              options={{
-                headerTintColor: '#1D446F',
-                title: ''
-              }}
-            /> */}
-
-            <Stack.Screen
-              name='Home'
-              component={BottomTabNavigator}
               options={{
                 headerTintColor: '#1D446F',
                 title: '',
@@ -89,10 +86,51 @@ export default function App(props) {
             />
 
             <Stack.Screen
+              name='LoginScreen'
+              component={FormLogin}
+              options={{
+                headerTintColor: '#1D446F',
+                title: '',
+                headerTransparent: 'true',
+                headerLeft: null
+              }}
+            />
+
+            <Stack.Screen
+              name='RegisterScreen'
+              component={FormRegister}
+              options={{
+                headerTintColor: '#1D446F',
+                title: '',
+                headerTransparent: 'true'
+              }}
+            />
+
+            <Stack.Screen
+              name='Home'
+              component={BottomTabNavigator}
+              options={{
+                headerTintColor: '#1D446F',
+                title: '',
+                headerTransparent: 'true',
+                headerLeft: null
+              }}
+            />
+
+            <Stack.Screen
               name='PredictionScreen'
               component={PredictionScreen}
               options={{
                 headerTintColor: '#1D446F',
+                title: '',
+                headerTransparent: 'true'
+              }}
+            />
+            <Stack.Screen
+              name='DetailedScreen'
+              component={DetailedScreen}
+              options={{
+                headerTintColor: 'white',
                 title: '',
                 headerTransparent: 'true'
               }}
