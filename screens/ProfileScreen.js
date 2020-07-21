@@ -8,13 +8,81 @@ import {
   ImageBackground,
   TouchableOpacity
 } from 'react-native';
-import { Icon } from 'native-base';
 
 class ProfileScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Profile</Text>
+        <View style={styles.image9Stack}>
+          <ImageBackground
+            source={require('../assets/images/roses.jpg')}
+            resizeMode='contain'
+            style={styles.image9}
+            imageStyle={styles.image9_imageStyle}
+          >
+            <Text style={styles.profile}>Profile</Text>
+            <View gradientImage='Gradient_RiPhkqO.png' style={styles.rect5}>
+              <View style={styles.image2Row}>
+                <Image
+                  source={require('../assets/images/profile.png')}
+                  resizeMode='contain'
+                  style={styles.image2}
+                ></Image>
+                <View style={styles.bittScottMangetColumn}>
+                  <Text style={styles.bittScottManget}>Bitt Scott Manget</Text>
+                  <Text style={styles.bittGmailCom}>bitt@gmail.com</Text>
+                </View>
+              </View>
+            </View>
+          </ImageBackground>
+          <View style={styles.rect}>
+            <TouchableOpacity style={styles.rect2}>
+              <View style={styles.image5Row}>
+                <Image
+                  source={require('../assets/images/edit.png')}
+                  resizeMode='contain'
+                  style={styles.image5}
+                ></Image>
+                <Text style={styles.editUserAccount}>Edit user account</Text>
+                <Image
+                  source={require('../assets/images/next.png')}
+                  resizeMode='contain'
+                  style={styles.image6}
+                ></Image>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rect3}>
+              <View style={styles.image4Row}>
+                <Image
+                  source={require('../assets/images/hr.png')}
+                  resizeMode='contain'
+                  style={styles.image4}
+                ></Image>
+                <Text style={styles.helpAndSupport}>Help and Support</Text>
+                <Image
+                  source={require('../assets/images/next.png')}
+                  resizeMode='contain'
+                  style={styles.image7}
+                ></Image>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rect4}>
+              <View style={styles.image3Row}>
+                <Image
+                  source={require('../assets/images/exit.png')}
+                  resizeMode='contain'
+                  style={styles.image3}
+                ></Image>
+                <Text style={styles.logout}>Signout</Text>
+                <Image
+                  source={require('../assets/images/next.png')}
+                  resizeMode='contain'
+                  style={styles.image8}
+                ></Image>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     );
   }
@@ -27,263 +95,194 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  image: {
+  image9: {
     top: 0,
-    left: 252,
-    width: 336,
-    height: 320,
-    position: 'absolute'
-  },
-  image1: {
-    top: 283,
     left: 0,
-    width: 466,
-    height: 500,
+    width: 416,
+    height: 401,
     position: 'absolute'
   },
-  image1_imageStyle: {},
-  rect2: {
-    width: 289,
-    height: 300,
-    marginTop: 20,
-    marginLeft: 155
-  },
-  rect3: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
-    flexDirection: 'row',
-    marginTop: 56,
-    marginLeft: 28
-  },
-  image4: {
-    width: 38,
-    height: 46
-  },
-  rect6: {
-    top: 0,
-    left: 115,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute'
-  },
-  loremIpsum: {
-    top: 6,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneueregular'
-  },
-  rect6Stack: {
-    width: 155,
-    height: 38,
-    marginLeft: 20,
-    marginTop: 7
-  },
-  image4Row: {
-    height: 46,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 11,
-    marginLeft: 13,
-    marginTop: 6
-  },
-  rect4: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
-    flexDirection: 'row',
-    marginTop: 39,
-    marginLeft: 28
-  },
-  image5: {
-    width: 39,
-    height: 41
-  },
-  rect7: {
-    top: 0,
-    left: 114,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute'
-  },
-  reportAProblem: {
-    top: 5,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneueregular'
-  },
-  rect7Stack: {
-    width: 154,
-    height: 38,
-    marginLeft: 21,
-    marginTop: 3
-  },
-  image5Row: {
-    height: 41,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 11,
-    marginLeft: 12,
-    marginTop: 10
+  image9_imageStyle: {},
+  profile: {
+    fontFamily: 'comicneuebold',
+    color: 'rgba(255,255,255,1)',
+    marginTop: 113,
+    marginLeft: 183
   },
   rect5: {
-    width: 237,
-    height: 63,
-    backgroundColor: 'rgba(255,255,255,1)',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible',
-    flexDirection: 'row',
-    marginTop: 38,
-    marginLeft: 29
-  },
-  image6: {
-    width: 33,
-    height: 46
-  },
-  rect8: {
-    top: 0,
-    left: 116,
-    width: 40,
-    height: 38,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute'
-  },
-  logout: {
-    top: 5,
-    left: 0,
-    width: 120,
-    height: 50,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneueregular'
-  },
-  rect8Stack: {
-    width: 156,
-    height: 38,
-    marginLeft: 18,
-    marginTop: 6
-  },
-  image6Row: {
-    height: 46,
-    flexDirection: 'row',
-    flex: 1,
-    marginRight: 12,
-    marginLeft: 18,
-    marginTop: 7
-  },
-  rect1: {
-    top: 165,
-    left: 167,
-    width: 265,
-    height: 123,
-    backgroundColor: 'rgba(255,255,255,1)',
-    position: 'absolute',
-    elevation: 6,
-    borderRadius: 15,
-    shadowOffset: {
-      height: 2,
-      width: 2
-    },
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.02,
-    shadowRadius: 2,
-    overflow: 'visible'
+    width: 247,
+    height: 78,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,1)',
+    borderRadius: 20,
+    marginTop: 25,
+    marginLeft: 86
   },
   image2: {
-    top: 10,
-    left: -7,
-    width: 120,
-    height: 113,
-    position: 'absolute'
+    width: 50,
+    height: 50
   },
-  image2_imageStyle: {},
-  image3: {
-    width: 76,
-    height: 47,
-    marginTop: 25,
-    marginLeft: 22
+  bittScottManget: {
+    fontFamily: 'comicneuebold',
+    color: 'rgba(255,255,255,1)',
+    fontSize: 18
   },
-  useremaEmailCom1: {
-    top: 22,
-    left: 114,
-    color: '#1D446F',
+  bittGmailCom: {
+    fontFamily: 'comicneuebold',
+    color: 'rgba(255,255,255,1)',
+    marginTop: 2
+  },
+  bittScottMangetColumn: {
+    width: 139,
+    marginLeft: 13,
+    marginBottom: 9
+  },
+  image2Row: {
+    height: 50,
+    flexDirection: 'row',
+    marginTop: 14,
+    marginLeft: 15,
+    marginRight: 30
+  },
+  rect: {
+    top: 307,
+    left: 23,
+    width: 360,
+    height: 438,
     position: 'absolute',
-    fontFamily: 'comicneuebold'
+    backgroundColor: 'rgba(255,255,255,1)',
+    borderRadius: 27
   },
-  useremaEmailCom2: {
-    top: 45,
-    left: 114,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneuebold'
+  rect2: {
+    width: 294,
+    height: 78,
+    backgroundColor: 'white',
+    borderRadius: 97,
+    flexDirection: 'row',
+    marginTop: 63,
+    marginLeft: 36,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
   },
-  useremaEmailCom3: {
-    top: 77,
-    left: 114,
-    color: '#1D446F',
-    position: 'absolute',
-    fontFamily: 'comicneuebold'
-  },
-  image2Stack: {
-    width: 250,
-    height: 113,
-    marginTop: 5,
-    marginLeft: 6
-  },
-  imageStack: {
-    width: 588,
-    height: 783,
-    marginTop: -72,
-    marginLeft: -119
-  },
-  heart: {
-    top: 67,
-    left: 200,
-    width: 41,
+  image5: {
+    width: 40,
     height: 46,
-    position: 'absolute'
+    marginTop: 6
   },
-  icon: {
-    color: '#1D446F',
-    fontSize: 38
+  editUserAccount: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    marginLeft: 10,
+    marginTop: 22,
+    fontSize: 16
+  },
+  image6: {
+    width: 29,
+    height: 58,
+    marginLeft: 59
+  },
+  image5Row: {
+    height: 58,
+    flexDirection: 'row',
+    flex: 1,
+    marginRight: 21,
+    marginLeft: 27,
+    marginTop: 9
+  },
+  rect3: {
+    width: 294,
+    height: 78,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    flexDirection: 'row',
+    marginTop: 25,
+    marginLeft: 38,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
+  },
+  image4: {
+    width: 40,
+    height: 46,
+    marginTop: 12
+  },
+  helpAndSupport: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    marginLeft: 12,
+    marginTop: 22,
+    fontSize: 16
+  },
+  image7: {
+    width: 29,
+    height: 58,
+    marginLeft: 58
+  },
+  image4Row: {
+    height: 58,
+    flexDirection: 'row',
+    flex: 1,
+    marginRight: 23,
+    marginLeft: 24,
+    marginTop: 10
+  },
+  rect4: {
+    width: 294,
+    height: 78,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    flexDirection: 'row',
+    marginTop: 26,
+    marginLeft: 36,
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 1,
+      height: 1
+    },
+    elevation: 5,
+    shadowOpacity: 0.16,
+    shadowRadius: 10
+  },
+  image3: {
+    width: 40,
+    height: 46,
+    marginTop: 6
+  },
+  logout: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    marginLeft: 14,
+    marginTop: 20,
+    fontSize: 16
+  },
+  image8: {
+    width: 29,
+    height: 58,
+    marginLeft: 124
+  },
+  image3Row: {
+    height: 58,
+    flexDirection: 'row',
+    flex: 1,
+    marginRight: 21,
+    marginLeft: 26,
+    marginTop: 10
+  },
+  image9Stack: {
+    width: 416,
+    height: 745,
+    marginTop: -74,
+    marginLeft: -23
   }
 });
