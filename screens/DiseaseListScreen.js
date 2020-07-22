@@ -23,7 +23,6 @@ const DATA = [
 
 class DiseaseListScreen extends Component {
   renderPlantDisease = (plant) => {
-    console.log('DiseaseListScreen -> renderPlantDisease -> plant', plant);
     return (
       <TouchableOpacity
         style={styles.rect3}
@@ -67,6 +66,7 @@ class DiseaseListScreen extends Component {
             }}
             renderItem={this.renderPlantDisease}
             keyExtractor={(item) => item.id.toString()}
+            showsVerticalScrollIndicator={false}
           />
         </View>
         <View style={styles.image3Stack}>
@@ -142,18 +142,18 @@ const styles = StyleSheet.create({
   },
   potatoEralyBright: {
     fontFamily: 'comicneuebold',
-    color: '#121212',
+    color: '#195F57',
     bottom: 7
   },
   mangoAppleOrange: {
     fontFamily: 'comicneueregular',
-    color: '#121212',
+    color: '#195F57',
     bottom: 3,
     marginLeft: 1
   },
   fungens: {
     fontFamily: 'comicneueregular',
-    color: '#121212',
+    color: '#195F57',
     marginTop: 14,
     marginLeft: 2
   },
@@ -242,14 +242,16 @@ const styles = StyleSheet.create({
   },
   other: {
     fontFamily: 'comicneuebold',
-    color: '#121212',
+    color: '#195F57',
     fontSize: 18,
-    marginTop: -1
+    marginTop: -1,
+    right: 25
   },
   pestsDiseases: {
     fontFamily: 'comicneuebold',
-    color: '#121212',
-    marginTop: 5
+    color: '#195F57',
+    marginTop: 5,
+    right: 25
   },
   otherColumn: {
     width: 107,
@@ -270,9 +272,9 @@ const styles = StyleSheet.create({
   },
   loremIpsum: {
     fontFamily: 'comicneuebold',
-    color: '#121212',
+    color: '#195F57',
     marginTop: 4,
-    marginLeft: 44
+    marginLeft: 20
   },
   image3Stack: {
     width: 507,

@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  Text
+  Text,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Item, Icon, Input } from 'native-base';
 
@@ -84,12 +85,15 @@ class FormLogin extends Component {
             imageStyle={styles.image_imageStyle}
           >
             <Image
-              source={require('../../assets/images/logincus.png')}
-              resizeMode='contain'
+              source={require('../../assets/images/wfh.png')}
+              resizeMode='cover'
               style={styles.image2}
             ></Image>
           </ImageBackground>
-          <Text style={styles.login}>LOGIN</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.login}>LOG</Text>
+            <Text style={styles.login1}>IN</Text>
+          </View>
         </View>
         <StatusBar
           animated={true}
@@ -98,7 +102,7 @@ class FormLogin extends Component {
           hidden={false}
         ></StatusBar>
 
-        <View
+        <KeyboardAvoidingView
           style={{
             paddingTop: 5,
             paddingLeft: 30,
@@ -115,9 +119,11 @@ class FormLogin extends Component {
               }}
             />
           </Item>
-        </View>
+        </KeyboardAvoidingView>
 
-        <View style={{ paddingTop: 5, paddingLeft: 30, paddingRight: 30 }}>
+        <KeyboardAvoidingView
+          style={{ paddingTop: 5, paddingLeft: 30, paddingRight: 30 }}
+        >
           <Text style={styles.label}>Password</Text>
 
           <Item>
@@ -130,7 +136,7 @@ class FormLogin extends Component {
               secureTextEntry={true}
             />
           </Item>
-        </View>
+        </KeyboardAvoidingView>
         <TouchableOpacity
           style={{ margin: 20, marginLeft: 30 }}
           onPress={() => {
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
     fontFamily: 'comicneuebold'
   },
   label: {
-    color: '#1D446F',
+    color: '#195F57',
     fontFamily: 'comicneuebold'
   },
   labelLine: {
@@ -217,9 +223,16 @@ const styles = StyleSheet.create({
   login: {
     top: 356,
     left: 0,
-    color: '#1D446F',
+    color: '#195F57',
     position: 'absolute',
-
+    fontSize: 40,
+    fontFamily: 'comicneuebold'
+  },
+  login1: {
+    top: 356,
+    left: 70,
+    color: 'white',
+    position: 'absolute',
     fontSize: 40,
     fontFamily: 'comicneuebold'
   },

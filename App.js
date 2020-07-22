@@ -100,7 +100,7 @@ export default function App(props) {
               name='RegisterScreen'
               component={FormRegister}
               options={{
-                headerTintColor: '#1D446F',
+                headerTintColor: 'white',
                 title: '',
                 headerTransparent: 'true'
               }}
@@ -121,7 +121,7 @@ export default function App(props) {
               name='PredictionScreen'
               component={PredictionScreen}
               options={{
-                headerTintColor: '#1D446F',
+                headerTintColor: '#1A8766',
                 title: '',
                 headerTransparent: 'true'
               }}
