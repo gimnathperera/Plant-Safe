@@ -8,7 +8,11 @@ class Home extends Component {
       <View style={styles.container}>
         <View style={styles.rect2StackStack}>
           <View style={styles.rect2Stack}>
-            <View style={styles.rect2}></View>
+            <Image
+              source={require('../assets/images/blob1.png')}
+              resizeMode='cover'
+              style={styles.rect2}
+            ></Image>
             <View style={styles.rect}>
               <Text style={styles.loremIpsum}>Hi! Welcome to Plant Safe</Text>
               <View style={styles.rect4}>
@@ -89,14 +93,28 @@ class Home extends Component {
               resizeMode='contain'
               style={styles.image2}
             ></Image>
-
+            {/* <Text
+              style={{
+                top: 30,
+                fontSize: 24,
+                fontFamily: 'comicneuebold',
+                color: '#195F57',
+                left: 10
+              }}
+            >
+              Plant Safe
+            </Text> */}
             <Image
-              source={require('../assets/images/logomain.png')}
+              source={require('../assets/images/logo.png')}
               resizeMode='contain'
               style={styles.image10}
             ></Image>
           </View>
-          <View style={styles.rect3}></View>
+          <Image
+            source={require('../assets/images/blob1.png')}
+            resizeMode='cover'
+            style={styles.rect3}
+          ></Image>
         </View>
       </View>
     );
@@ -111,12 +129,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   rect2: {
-    top: 0,
-    left: 122,
-    width: 273,
-    height: 245,
-    position: 'absolute',
-    backgroundColor: '#5BB59B'
+    top: -40,
+    left: 110,
+    height: 350,
+    position: 'absolute'
   },
   rect: {
     top: 90,
@@ -360,11 +376,11 @@ const styles = StyleSheet.create({
     fontSize: 13
   },
   image10: {
-    top: 10,
+    top: 20,
     bottom: 20,
-    left: 0,
-    width: 74,
-    height: 74,
+    left: -5,
+    width: 120,
+    height: 35,
     position: 'absolute'
   },
   rect2Stack: {
@@ -379,8 +395,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: 273,
     height: 245,
-    position: 'absolute',
-    backgroundColor: '#5BB59B'
+    position: 'absolute'
   },
   rect2StackStack: {
     width: 459,

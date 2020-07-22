@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   rect3: {
     top: 0,
-    left: 133,
+    left: 132,
     width: 272,
     height: 156,
     position: 'absolute',

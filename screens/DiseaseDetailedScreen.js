@@ -54,9 +54,9 @@ class DiseaseDetailedScreen extends Component {
                 Spot of come to ever hand as lady meet on. Delicate contempt
                 received two yet advanced. Gentleman as belonging he commanded
                 believing dejection in by. On no am winding chicken so behaved.
-                Its preserved sex enjoyment new way behaviour. Him yet
-                devonshire celebrated especially. Unfeeling one provision are
-                smallness resembled repulsive.
+                Its preserved enjoyment new way behaviour. Him yet devonshire
+                celebrated especially. Unfeeling one provision are smallness
+                resembled repulsive.
               </Text>
             </View>
           </View>

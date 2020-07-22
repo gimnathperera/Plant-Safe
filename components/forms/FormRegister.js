@@ -89,7 +89,10 @@ class FormRegister extends Component {
               resizeMode='contain'
               style={styles.image22}
             ></Image>
-            <Text style={styles.login}>SIGNUP</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.login}>SIGN</Text>
+              <Text style={styles.login1}>UP</Text>
+            </View>
           </View>
         </ImageBackground>
         <StatusBar
@@ -100,7 +103,7 @@ class FormRegister extends Component {
         ></StatusBar>
 
         <View style={{ paddingBottom: 15, paddingLeft: 30, paddingRight: 30 }}>
-          <Text style={{ color: '#1D446F', fontFamily: 'comicneuebold' }}>
+          <Text style={{ color: '#195F57', fontFamily: 'comicneuebold' }}>
             Fullname
           </Text>
 
@@ -115,7 +118,7 @@ class FormRegister extends Component {
           </Item>
         </View>
         <View style={{ paddingLeft: 30, paddingRight: 30 }}>
-          <Text style={{ color: '#1D446F', fontFamily: 'comicneuebold' }}>
+          <Text style={{ color: '#195F57', fontFamily: 'comicneuebold' }}>
             Email
           </Text>
 
@@ -131,7 +134,7 @@ class FormRegister extends Component {
           <Text></Text>
         </View>
         <View style={{ paddingLeft: 30, paddingRight: 30 }}>
-          <Text style={{ color: '#1D446F', fontFamily: 'comicneuebold' }}>
+          <Text style={{ color: '#195F57', fontFamily: 'comicneuebold' }}>
             Passwords
           </Text>
 
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     width: 121,
     height: 40,
     borderRadius: 25,
-    backgroundColor: 'rgba(74,144,226,1)',
+    backgroundColor: '#195F57',
     marginLeft: 4,
     justifyContent: 'center',
     alignItems: 'center'
@@ -212,6 +215,13 @@ const styles = StyleSheet.create({
     color: '#1D446F',
     fontSize: 40,
     marginLeft: 0,
+    fontFamily: 'comicneuebold',
+    marginTop: 170
+  },
+  login1: {
+    color: '#195F57',
+    fontSize: 40,
+    marginLeft: 2,
     fontFamily: 'comicneuebold',
     marginTop: 170
   },
