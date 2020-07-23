@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-// import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import axios from 'axios';
 
 export class CameraScreen extends Component {
   pickFromGallery = async () => {
@@ -14,7 +14,14 @@ export class CameraScreen extends Component {
         aspect: [1, 1],
         quality: 1 //1 means high quality
       });
-      console.log(data);
+      if (!data.cancelled) {
+        let newFile = {
+          uri: data.uri,
+          type: `test/${data.uri.split('.')[1]}`,
+          name: `test.${data.uri.split('.')[1]}`
+        };
+        this.onUpload(newFile);
+      }
     } else {
       Alert.alert('You need to give permissions');
     }
@@ -29,9 +36,42 @@ export class CameraScreen extends Component {
         aspect: [1, 1],
         quality: 1 //1 means high quality
       });
-      console.log(data);
+      if (!data.cancelled) {
+        let newFile = {
+          uri: data.uri,
+          type: `test/${data.uri.split('.')[1]}`,
+          name: `test.${data.uri.split('.')[1]}`
+        };
+        this.onUpload(newFile);
+      }
     } else {
       Alert.alert('You need to give permissions');
+    }
+  };
+
+  onUpload = async (image) => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'plantsApp');
+    data.append('cloud_name', 'dark123');
+
+    // fetch('https://api.cloudinary.com/v1_1/dark123/image/upload', {
+    //   method: 'POST',
+    //   body: data
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/dark123/image/upload`,
+        data
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
