@@ -55,15 +55,6 @@ export class CameraScreen extends Component {
     data.append('upload_preset', 'plantsApp');
     data.append('cloud_name', 'dark123');
 
-    // fetch('https://api.cloudinary.com/v1_1/dark123/image/upload', {
-    //   method: 'POST',
-    //   body: data
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
-
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/dark123/image/upload`,

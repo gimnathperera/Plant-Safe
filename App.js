@@ -76,7 +76,7 @@ export default function App(props) {
           initialState={initialNavigationState}
         >
           <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
               name='CameraScreen'
               component={CameraScreen}
               options={{
@@ -84,7 +84,7 @@ export default function App(props) {
                 title: '',
                 headerTransparent: 'true'
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name='InitialScreen'

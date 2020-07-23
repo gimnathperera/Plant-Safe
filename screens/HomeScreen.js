@@ -1,8 +1,88 @@
 import React, { Component } from 'react';
-
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Alert
+} from 'react-native';
+import Modal from 'react-native-modal';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import axios from 'axios';
 
 class Home extends Component {
+  state = {
+    isVisible: false
+  };
+
+  onShowModal = () => {
+    this.setState({
+      isVisible: true
+    });
+  };
+  pickFromGallery = async () => {
+    const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (granted) {
+      let data = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1 //1 means high quality
+      });
+      if (!data.cancelled) {
+        let newFile = {
+          uri: data.uri,
+          type: `test/${data.uri.split('.')[1]}`,
+          name: `test.${data.uri.split('.')[1]}`
+        };
+        this.onUpload(newFile);
+      }
+    } else {
+      Alert.alert('You need to give permissions');
+    }
+  };
+
+  pickFromCamera = async () => {
+    const { granted } = await Permissions.askAsync(Permissions.CAMERA);
+    if (granted) {
+      let data = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1 //1 means high quality
+      });
+      if (!data.cancelled) {
+        let newFile = {
+          uri: data.uri,
+          type: `test/${data.uri.split('.')[1]}`,
+          name: `test.${data.uri.split('.')[1]}`
+        };
+        this.onUpload(newFile);
+      }
+    } else {
+      Alert.alert('You need to give permissions');
+    }
+  };
+
+  onUpload = async (image) => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'plantsApp');
+    data.append('cloud_name', 'dark123');
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/dark123/image/upload`,
+        data
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -48,7 +128,8 @@ class Home extends Component {
                   <TouchableOpacity
                     style={styles.rect5}
                     onPress={() => {
-                      this.props.navigation.navigate('PredictionScreen');
+                      // this.props.navigation.navigate('PredictionScreen');
+                      this.onShowModal();
                     }}
                   >
                     <Text style={styles.takeAPicture}>Take a Picture</Text>
@@ -116,6 +197,48 @@ class Home extends Component {
             style={styles.rect3}
           ></Image>
         </View>
+        <Modal
+          isVisible={this.state.isVisible}
+          onBackdropPress={() => this.setState({ isVisible: false })}
+        >
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignContent: 'center'
+            }}
+          >
+            <View style={styles.modalView}>
+              <Text style={styles.modalHeader}>Choose</Text>
+              <View style={styles.modalBody}>
+                <TouchableOpacity onPress={this.pickFromCamera}>
+                  <Image
+                    source={require('../assets/images/photo.png')}
+                    resizeMode='contain'
+                    style={styles.modalImage1}
+                  ></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.pickFromGallery}>
+                  <Image
+                    source={require('../assets/images/memories.png')}
+                    resizeMode='contain'
+                    style={styles.modalImage2}
+                  ></Image>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.cameraRow}>
+                <Text style={styles.camera}>Camera</Text>
+                <Text style={styles.gallery}>Gallery</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => this.setState({ isVisible: false })}
+              >
+                <Text style={styles.modalCancel}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -133,6 +256,65 @@ const styles = StyleSheet.create({
     left: 110,
     height: 350,
     position: 'absolute'
+  },
+  modalView: {
+    width: 239,
+    height: 157,
+    backgroundColor: 'white',
+    borderRadius: 17,
+
+    alignSelf: 'center'
+  },
+  modalHeader: {
+    fontFamily: 'comicneuebold',
+    color: '#121212',
+    fontSize: 18,
+    marginTop: 12,
+    marginLeft: 14
+  },
+  modalBody: {
+    height: 30,
+    flexDirection: 'row',
+    marginTop: 21,
+    marginLeft: 55,
+    marginRight: 54
+  },
+  modalImage1: {
+    width: 50,
+    height: 50,
+    bottom: 9,
+    right: 10
+  },
+  modalImage2: {
+    width: 50,
+    height: 50,
+    marginLeft: 40,
+    bottom: 10
+  },
+  cameraRow: {
+    height: 17,
+    flexDirection: 'row',
+    marginTop: 7,
+    marginLeft: 45,
+    marginRight: 48
+  },
+  camera: {
+    fontFamily: 'comicneueregular',
+    color: '#121212',
+    top: 5,
+    left: 2
+  },
+  gallery: {
+    fontFamily: 'comicneueregular',
+    color: '#121212',
+    marginLeft: 59,
+    top: 5
+  },
+  modalCancel: {
+    fontFamily: 'comicneuebold',
+    color: 'red',
+    marginTop: 20,
+    marginLeft: 180
   },
   rect: {
     top: 90,
