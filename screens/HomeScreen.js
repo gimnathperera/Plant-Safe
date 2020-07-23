@@ -11,10 +11,12 @@ import Modal from 'react-native-modal';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 class Home extends Component {
   state = {
-    isVisible: false
+    isVisible: false,
+    isLoading: false
   };
 
   onShowModal = () => {
@@ -23,6 +25,9 @@ class Home extends Component {
     });
   };
   pickFromGallery = async () => {
+    this.setState({
+      isVisible: false
+    });
     const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (granted) {
       let data = await ImagePicker.launchImageLibraryAsync({
@@ -45,6 +50,9 @@ class Home extends Component {
   };
 
   pickFromCamera = async () => {
+    this.setState({
+      isVisible: false
+    });
     const { granted } = await Permissions.askAsync(Permissions.CAMERA);
     if (granted) {
       let data = await ImagePicker.launchCameraAsync({
@@ -73,11 +81,20 @@ class Home extends Component {
     data.append('cloud_name', 'dark123');
 
     try {
+      this.setState({
+        isLoading: true
+      });
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/dark123/image/upload`,
         data
       );
-      console.log(response.data);
+      if (response) {
+        this.setState({
+          isLoading: false
+        });
+        console.log(response.data);
+        this.props.navigation.navigate('PredictionScreen');
+      }
     } catch (err) {
       console.log(err.message);
     }
@@ -88,6 +105,7 @@ class Home extends Component {
       <View style={styles.container}>
         <View style={styles.rect2StackStack}>
           <View style={styles.rect2Stack}>
+            <Loader isLoading={this.state.isLoading} />
             <Image
               source={require('../assets/images/blob1.png')}
               resizeMode='cover'
