@@ -18,7 +18,6 @@ import FormLogin from './components/forms/FormLogin';
 import FormRegister from './components/forms/FormRegister';
 import InitialScreen from './screens/InitialScreen';
 import DetailedScreen from './screens/DiseaseDetailedScreen';
-import CameraScreen from './screens/CameraScreen';
 
 const Stack = createStackNavigator();
 
@@ -76,16 +75,6 @@ export default function App(props) {
           initialState={initialNavigationState}
         >
           <Stack.Navigator>
-            {/* <Stack.Screen
-              name='CameraScreen'
-              component={CameraScreen}
-              options={{
-                headerTintColor: '#1A8766',
-                title: '',
-                headerTransparent: 'true'
-              }}
-            /> */}
-
             <Stack.Screen
               name='InitialScreen'
               component={InitialScreen}
