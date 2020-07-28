@@ -1,111 +1,14 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Alert
-} from 'react-native';
-import Modal from 'react-native-modal';
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
-import axios from 'axios';
-import Loader from '../components/Loader';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+
+import Camera from '../components/Camera';
 
 class Home extends Component {
-  state = {
-    isVisible: false,
-    isLoading: false
-  };
-
-  onShowModal = () => {
-    this.setState({
-      isVisible: true
-    });
-  };
-  pickFromGallery = async () => {
-    this.setState({
-      isVisible: false
-    });
-    const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (granted) {
-      let data = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1 //1 means high quality
-      });
-      if (!data.cancelled) {
-        let newFile = {
-          uri: data.uri,
-          type: `test/${data.uri.split('.')[1]}`,
-          name: `test.${data.uri.split('.')[1]}`
-        };
-        this.onUpload(newFile);
-      }
-    } else {
-      Alert.alert('You need to give permissions');
-    }
-  };
-
-  pickFromCamera = async () => {
-    this.setState({
-      isVisible: false
-    });
-    const { granted } = await Permissions.askAsync(Permissions.CAMERA);
-    if (granted) {
-      let data = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1 //1 means high quality
-      });
-      if (!data.cancelled) {
-        let newFile = {
-          uri: data.uri,
-          type: `test/${data.uri.split('.')[1]}`,
-          name: `test.${data.uri.split('.')[1]}`
-        };
-        this.onUpload(newFile);
-      }
-    } else {
-      Alert.alert('You need to give permissions');
-    }
-  };
-
-  onUpload = async (image) => {
-    const data = new FormData();
-    data.append('file', image);
-    data.append('upload_preset', 'plantsApp');
-    data.append('cloud_name', 'dark123');
-
-    try {
-      this.setState({
-        isLoading: true
-      });
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dark123/image/upload`,
-        data
-      );
-      if (response) {
-        this.setState({
-          isLoading: false
-        });
-        console.log(response.data);
-        this.props.navigation.navigate('PredictionScreen');
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.rect2StackStack}>
           <View style={styles.rect2Stack}>
-            <Loader isLoading={this.state.isLoading} />
             <Image
               source={require('../assets/images/blob1.png')}
               resizeMode='cover'
@@ -142,23 +45,7 @@ class Home extends Component {
                     style={styles.image5}
                   ></Image>
                 </View>
-                <View style={styles.rect5Stack}>
-                  <TouchableOpacity
-                    style={styles.rect5}
-                    onPress={() => {
-                      // this.props.navigation.navigate('PredictionScreen');
-                      this.onShowModal();
-                    }}
-                  >
-                    <Text style={styles.takeAPicture}>Take a Picture</Text>
-                  </TouchableOpacity>
-
-                  <Image
-                    source={require('../assets/images/photography.png')}
-                    resizeMode='contain'
-                    style={styles.image8}
-                  ></Image>
-                </View>
+                <Camera navigation={this.props.navigation} />
               </View>
               <View style={styles.rect6}>
                 <Text style={styles.previousPictures}>Previous pictures</Text>
@@ -192,17 +79,6 @@ class Home extends Component {
               resizeMode='contain'
               style={styles.image2}
             ></Image>
-            {/* <Text
-              style={{
-                top: 30,
-                fontSize: 24,
-                fontFamily: 'comicneuebold',
-                color: '#195F57',
-                left: 10
-              }}
-            >
-              Plant Safe
-            </Text> */}
             <Image
               source={require('../assets/images/logo.png')}
               resizeMode='contain'
@@ -215,48 +91,6 @@ class Home extends Component {
             style={styles.rect3}
           ></Image>
         </View>
-        <Modal
-          isVisible={this.state.isVisible}
-          onBackdropPress={() => this.setState({ isVisible: false })}
-        >
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignContent: 'center'
-            }}
-          >
-            <View style={styles.modalView}>
-              <Text style={styles.modalHeader}>Choose</Text>
-              <View style={styles.modalBody}>
-                <TouchableOpacity onPress={this.pickFromCamera}>
-                  <Image
-                    source={require('../assets/images/photo.png')}
-                    resizeMode='contain'
-                    style={styles.modalImage1}
-                  ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.pickFromGallery}>
-                  <Image
-                    source={require('../assets/images/memories.png')}
-                    resizeMode='contain'
-                    style={styles.modalImage2}
-                  ></Image>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.cameraRow}>
-                <Text style={styles.camera}>Camera</Text>
-                <Text style={styles.gallery}>Gallery</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => this.setState({ isVisible: false })}
-              >
-                <Text style={styles.modalCancel}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
       </View>
     );
   }
@@ -275,65 +109,7 @@ const styles = StyleSheet.create({
     height: 350,
     position: 'absolute'
   },
-  modalView: {
-    width: 239,
-    height: 157,
-    backgroundColor: 'white',
-    borderRadius: 17,
 
-    alignSelf: 'center'
-  },
-  modalHeader: {
-    fontFamily: 'comicneuebold',
-    color: '#121212',
-    fontSize: 18,
-    marginTop: 12,
-    marginLeft: 14
-  },
-  modalBody: {
-    height: 30,
-    flexDirection: 'row',
-    marginTop: 21,
-    marginLeft: 55,
-    marginRight: 54
-  },
-  modalImage1: {
-    width: 50,
-    height: 50,
-    bottom: 9,
-    right: 10
-  },
-  modalImage2: {
-    width: 50,
-    height: 50,
-    marginLeft: 40,
-    bottom: 10
-  },
-  cameraRow: {
-    height: 17,
-    flexDirection: 'row',
-    marginTop: 7,
-    marginLeft: 45,
-    marginRight: 48
-  },
-  camera: {
-    fontFamily: 'comicneueregular',
-    color: '#121212',
-    top: 5,
-    left: 2
-  },
-  gallery: {
-    fontFamily: 'comicneueregular',
-    color: '#121212',
-    marginLeft: 59,
-    top: 5
-  },
-  modalCancel: {
-    fontFamily: 'comicneuebold',
-    color: 'red',
-    marginTop: 20,
-    marginLeft: 180
-  },
   rect: {
     top: 90,
     width: 278,
@@ -415,35 +191,6 @@ const styles = StyleSheet.create({
     marginTop: 27,
     marginLeft: 31,
     marginRight: 20
-  },
-  rect5: {
-    top: 1,
-    left: 0,
-    width: 201,
-    height: 43,
-    position: 'absolute',
-    backgroundColor: '#195F57',
-    borderRadius: 56
-  },
-  takeAPicture: {
-    fontFamily: 'comicneuebold',
-    color: 'rgba(255,255,255,1)',
-    fontSize: 14,
-    marginTop: 13,
-    marginLeft: 84
-  },
-  image8: {
-    top: 0,
-    left: 25,
-    width: 35,
-    height: 42,
-    position: 'absolute'
-  },
-  rect5Stack: {
-    width: 201,
-    height: 44,
-    marginTop: 9,
-    marginLeft: 19
   },
   rect6: {
     width: 238,
