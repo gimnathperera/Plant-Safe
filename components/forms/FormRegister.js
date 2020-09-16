@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   View,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Item, Icon, Input } from 'native-base';
 
-// import { customerSignUp } from '../../store/actions';
+import { userSignUp } from '../../store/actions';
 
 class FormRegister extends Component {
   state = {
@@ -20,13 +20,13 @@ class FormRegister extends Component {
     email: ''
   };
 
-  //   componentDidUpdate(prevProps) {
-  //     if (this.props.customer !== prevProps.customer) {
-  //       alert('Account created successfully');
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      alert('Account created successfully');
 
-  //       this.props.navigation.navigate('LoginCustomer');
-  //     }
-  //   }
+      this.props.navigation.navigate('LoginScreen');
+    }
+  }
 
   onSubmit = () => {
     const { fullname, email, password } = this.state;
@@ -35,27 +35,22 @@ class FormRegister extends Component {
       email,
       password
     };
-    console.log('FormRegister -> onSubmit -> user', user);
-    // if (fullname == '') {
-    //   alert('Fullname is required');
-    // } else if (email == '') {
-    //   alert('Email is required');
-    // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-    //   alert('Invalid email');
-    // } else if (password == '') {
-    //   alert('Password is required');
-    // } else {
-    //   const newUser = {
-    //     username: email,
-    //     fullName: fullname,
-    //     password,
-    //     confirmPassword: password,
-    //     type: 'customer'
-    //   };
-
-    //   // console.log(newUser);
-    //   this.props.customerSignUp(newUser);
-    // }
+    if (fullname == '') {
+      alert('Fullname is required');
+    } else if (email == '') {
+      alert('Email is required');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      alert('Invalid email');
+    } else if (password == '') {
+      alert('Password is required');
+    } else {
+      const newUser = {
+        email,
+        fullname,
+        password
+      };
+      this.props.userSignUp(newUser);
+    }
   };
 
   render() {
@@ -154,7 +149,13 @@ class FormRegister extends Component {
   }
 }
 
-export default FormRegister;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps, {
+  userSignUp
+})(FormRegister);
 
 const styles = StyleSheet.create({
   container: {
