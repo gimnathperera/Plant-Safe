@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Item, Icon, Input } from 'native-base';
 
-// import { customerSignIn } from '../../store/actions';
+import { userSignIn } from '../../store/actions';
 
 class FormLogin extends Component {
   state = {
@@ -29,34 +29,31 @@ class FormLogin extends Component {
   // }
   //   }
 
-  //   componentDidUpdate(prevProps) {
-  //     if (this.props.security !== prevProps.security) {
-  //       this.props.navigation.navigate('HomeCutomer');
-  //     }
-  //   }
+  componentDidUpdate(prevProps) {
+    if (this.props.security !== prevProps.security) {
+      this.props.navigation.navigate('Home');
+    }
+  }
 
   onSubmit = () => {
     const { email, password } = this.state;
-    console.log('email=>', email);
-    console.log('email=>', password);
 
-    this.props.navigation.navigate('Home');
+    // this.props.navigation.navigate('Home');
 
-    // if (email == '') {
-    //   alert('Email is required');
-    // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-    //   alert('Invalid email');
-    // } else if (password == '') {
-    //   alert('Password is required');
-    // } else {
-    //   const credentials = {
-    //     username: email,
-    //     password
-    //   };
+    if (email == '') {
+      alert('Email is required');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      alert('Invalid email');
+    } else if (password == '') {
+      alert('Password is required');
+    } else {
+      const credentials = {
+        email,
+        password
+      };
 
-    //   // console.log('credentials=>', credentials);
-    //   this.props.customerSignIn(credentials);
-    // }
+      this.props.userSignIn(credentials);
+    }
   };
 
   render() {
@@ -152,7 +149,14 @@ class FormLogin extends Component {
   }
 }
 
-export default FormLogin;
+const mapStateToProps = (state) => {
+  // console.log('mapStateToProps -> state', state);
+  return { security: state.security };
+};
+
+export default connect(mapStateToProps, {
+  userSignIn
+})(FormLogin);
 
 const styles = StyleSheet.create({
   container: {

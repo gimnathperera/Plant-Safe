@@ -5,13 +5,13 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-// import { AsyncStorage } from 'react-native';
-
+import reducers from './store/reducers/index';
 import useLinking from './navigation/useLinking';
-
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-
 import PredictionScreen from './screens/PredictionScreen';
 // import InitialScreen from './screens/InitialScreen';
 import FormLogin from './components/forms/FormLogin';
@@ -21,18 +21,14 @@ import DetailedScreen from './screens/DiseaseDetailedScreen';
 
 const Stack = createStackNavigator();
 
+const store = createStore(reducers, applyMiddleware(thunk));
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
 
-  //Setting JWT token and checking weather the token is available or not
-
-  // const token = AsyncStorage.getItem('token');
-  // console.log(token);
-
-  // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
@@ -67,77 +63,79 @@ export default function App(props) {
     return null;
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
 
-        <NavigationContainer
-          ref={containerRef}
-          initialState={initialNavigationState}
-        >
-          <Stack.Navigator>
-            <Stack.Screen
-              name='InitialScreen'
-              component={InitialScreen}
-              options={{
-                headerTintColor: '#1D446F',
-                title: '',
-                headerTransparent: 'true'
-              }}
-            />
+          <NavigationContainer
+            ref={containerRef}
+            initialState={initialNavigationState}
+          >
+            <Stack.Navigator>
+              <Stack.Screen
+                name='InitialScreen'
+                component={InitialScreen}
+                options={{
+                  headerTintColor: '#1D446F',
+                  title: '',
+                  headerTransparent: 'true'
+                }}
+              />
 
-            <Stack.Screen
-              name='LoginScreen'
-              component={FormLogin}
-              options={{
-                headerTintColor: '#1D446F',
-                title: '',
-                headerTransparent: 'true',
-                headerLeft: null
-              }}
-            />
+              <Stack.Screen
+                name='LoginScreen'
+                component={FormLogin}
+                options={{
+                  headerTintColor: '#1D446F',
+                  title: '',
+                  headerTransparent: 'true',
+                  headerLeft: null
+                }}
+              />
 
-            <Stack.Screen
-              name='RegisterScreen'
-              component={FormRegister}
-              options={{
-                headerTintColor: 'white',
-                title: '',
-                headerTransparent: 'true'
-              }}
-            />
+              <Stack.Screen
+                name='RegisterScreen'
+                component={FormRegister}
+                options={{
+                  headerTintColor: 'white',
+                  title: '',
+                  headerTransparent: 'true'
+                }}
+              />
 
-            <Stack.Screen
-              name='Home'
-              component={BottomTabNavigator}
-              options={{
-                headerTintColor: '#1D446F',
-                title: '',
-                headerTransparent: 'true',
-                headerLeft: null
-              }}
-            />
+              <Stack.Screen
+                name='Home'
+                component={BottomTabNavigator}
+                options={{
+                  headerTintColor: '#1D446F',
+                  title: '',
+                  headerTransparent: 'true',
+                  headerLeft: null
+                }}
+              />
 
-            <Stack.Screen
-              name='PredictionScreen'
-              component={PredictionScreen}
-              options={{
-                headerTintColor: '#1A8766',
-                title: '',
-                headerTransparent: 'true'
-              }}
-            />
-            <Stack.Screen
-              name='DetailedScreen'
-              component={DetailedScreen}
-              options={{
-                headerTintColor: 'white',
-                title: '',
-                headerTransparent: 'true'
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+              <Stack.Screen
+                name='PredictionScreen'
+                component={PredictionScreen}
+                options={{
+                  headerTintColor: '#1A8766',
+                  title: '',
+                  headerTransparent: 'true'
+                }}
+              />
+              <Stack.Screen
+                name='DetailedScreen'
+                component={DetailedScreen}
+                options={{
+                  headerTintColor: 'white',
+                  title: '',
+                  headerTransparent: 'true'
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </Provider>
     );
   }
 }
