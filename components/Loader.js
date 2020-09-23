@@ -32,8 +32,11 @@ class Loader extends Component {
       >
         <View style={styles.modalBackground}>
           <View style={styles.activityIndicatorWrapper}>
-            <ActivityIndicator animating={this.state.loading} color={'green'} />
-
+            <ActivityIndicator animating={this.state.loading} color={'white'} />
+            {/* <Image
+              source={require('../assets/images/catapiler.gif')}
+              resizeMode='contain'
+            ></Image> */}
             {/* If you want to image set source here */}
             {/* <Image
               source={require('../assets/images/loader.gif')}
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
     zIndex: 1000
   },
   activityIndicatorWrapper: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     height: 100,
     width: 100,
     borderRadius: 10,

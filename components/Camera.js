@@ -33,7 +33,7 @@ export default class Camera extends Component {
       let data = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [1, 1],
+        aspect: [4, 3],
         quality: 1 //1 means high quality
       });
       if (!data.cancelled) {
@@ -58,7 +58,7 @@ export default class Camera extends Component {
       let data = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [1, 1],
+        aspect: [4, 3],
         quality: 1 //1 means high quality
       });
       if (!data.cancelled) {
@@ -77,21 +77,51 @@ export default class Camera extends Component {
   onUpload = async (image) => {
     const data = new FormData();
     data.append('file', image);
-    data.append('upload_preset', 'plantsApp');
-    data.append('cloud_name', 'dark123');
 
     try {
       this.setState({
         isLoading: true
       });
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dark123/image/upload`,
+        `http://192.168.1.4:5000/api/validate`,
         data
       );
       if (response) {
         this.setState({
           isLoading: false
         });
+        if (response.data.status > 0) {
+          this.getDiseasePredection(image);
+        } else {
+          alert(
+            'No Plant Leaf Detected, Please provide an image of a plant leaf'
+          );
+          console.log('No Plant Detected');
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  getDiseasePredection = async (image) => {
+    const data = new FormData();
+    data.append('file', image);
+    try {
+      this.setState({
+        isLoading: true
+      });
+
+      const response = await axios.post(
+        `http://192.168.1.4:5000/api/predict`,
+        data
+      );
+
+      if (response.data) {
+        this.setState({
+          isLoading: false
+        });
+
         console.log(response.data);
         this.props.navigation.navigate('PredictionScreen');
       }
