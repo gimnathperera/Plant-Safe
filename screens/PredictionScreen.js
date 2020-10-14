@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 class PredictionScreen extends Component {
   render() {
+    const { _disease, confidence } = this.props.route.params;
+
     return (
       <View style={styles.container}>
         <View style={styles.imageStack}>
@@ -58,11 +60,8 @@ class PredictionScreen extends Component {
         <View style={styles.rect2}>
           <View style={styles.potatoColumnRow}>
             <View style={styles.potatoColumn}>
-              <Text style={styles.potato}>Potato</Text>
-              <Text style={styles.plantDiseaseName1}>
-                Potato Light Early bitght
-              </Text>
-              <Text style={styles.confidence71}>Confidence 71%</Text>
+              <Text style={styles.plantDiseaseName1}>{_disease}</Text>
+              <Text style={styles.confidence71}>Confidence: {confidence}</Text>
             </View>
             <Image
               source={require('../assets/images/pest.png')}

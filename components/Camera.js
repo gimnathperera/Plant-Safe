@@ -122,8 +122,13 @@ export default class Camera extends Component {
           isLoading: false
         });
 
-        console.log(response.data);
-        this.props.navigation.navigate('PredictionScreen');
+        const { disease, confidence } = response.data;
+        let _disease = disease.split('__').join(' ');
+
+        this.props.navigation.navigate('PredictionScreen', {
+          _disease,
+          confidence
+        });
       }
     } catch (err) {
       console.log(err.message);
