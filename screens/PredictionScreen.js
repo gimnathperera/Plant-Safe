@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
-
+import _ from 'lodash';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
+import { data } from '../public/diseases';
+
 class PredictionScreen extends Component {
+  renderDescription = (_id) => {
+    if (!data.length == 0) {
+      let item = _.filter(data, { id: parseInt(_id) });
+      return <Text>{item[0].description}</Text>;
+    } else {
+      return <Text>No records found</Text>;
+    }
+  };
+
+  renderImage = (_id) => {
+    if (!data.length == 0) {
+      let item = _.filter(data, { id: parseInt(_id) });
+
+      return (
+        <Image
+          source={item[0].image}
+          resizeMode='cover'
+          style={styles.plantImage}
+        ></Image>
+      );
+    } else {
+      return <Text>No image found</Text>;
+    }
+  };
+
   render() {
-    const { _disease, confidence } = this.props.route.params;
+    const { _disease, confidence, id } = this.props.route.params;
 
     return (
       <View style={styles.container}>
@@ -14,13 +41,7 @@ class PredictionScreen extends Component {
             resizeMode='contain'
             style={styles.image}
           ></Image>
-          <View style={styles.rect}>
-            <Image
-              source={require('../assets/images/potato.png')}
-              resizeMode='cover'
-              style={styles.plantImage}
-            ></Image>
-          </View>
+          <View style={styles.rect}>{this.renderImage(id)}</View>
         </View>
         <View style={styles.plantDiseaseName3Row}>
           <Text style={styles.plantDiseaseName3}></Text>
@@ -31,14 +52,9 @@ class PredictionScreen extends Component {
               style={styles.image1}
             ></Image>
             <View style={styles.rect3}>
-              <Text style={styles.plantDiseaseName2}>
-                Potato Light Early bitght
-              </Text>
+              <Text style={styles.plantDiseaseName2}>{_disease}</Text>
               <View style={styles.textStack}>
-                <Text style={styles.text}>
-                  Potato Light Early bitghtPotato Light Early bitght Potato
-                  Light Early bitghtPotato Light Early bitghtPotato Light
-                </Text>
+                <Text style={styles.text}>{this.renderDescription(id)}</Text>
                 <View style={styles.rect4}>
                   <Image
                     source={require('../assets/images/dislike.png')}
