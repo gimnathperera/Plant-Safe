@@ -16,6 +16,21 @@ class Home extends Component {
             ></Image>
             <View style={styles.rect}>
               <Text style={styles.loremIpsum}>Hi! Welcome to Plant Safe</Text>
+              <View style={styles.rect6}>
+                <Text style={styles.previousPictures}>What is Plant Safe?</Text>
+
+                <Text style={styles.infoTxt}>
+                  ✔ Turn your Android phone into a mobile crop doctor.
+                </Text>
+                <Text style={styles.infoTxt}>
+                  ✔ With just one photo, PlantSafe diagnoses infected crops and
+                  offers treatments for any disease.
+                </Text>
+                <Text style={styles.infoTxt}>
+                  ✔ Benefit from agricultural experts' know-how or help fellow
+                  farmers with your knowledge.
+                </Text>
+              </View>
               <View style={styles.rect4}>
                 <Text style={styles.healYourCrop}>Heal Your Crop!</Text>
                 <View style={styles.image3Row}>
@@ -46,32 +61,6 @@ class Home extends Component {
                   ></Image>
                 </View>
                 <Camera navigation={this.props.navigation} />
-              </View>
-              <View style={styles.rect6}>
-                <Text style={styles.previousPictures}>Previous pictures</Text>
-                <View style={styles.rect8Row}>
-                  <View style={styles.rect8}></View>
-                  <View style={styles.rect10}></View>
-                  <View style={styles.rect9}></View>
-                  <View style={styles.rect11}></View>
-                </View>
-              </View>
-              <View style={styles.rect7}>
-                <View style={styles.today14JulColumnRow}>
-                  <View style={styles.today14JulColumn}>
-                    <Text style={styles.today14Jul}>Today, 14 Jul</Text>
-                    <Text style={styles.today15}>27.7° C</Text>
-                    <Text style={styles.sunset632Pm}>Sunset 6.32 PM</Text>
-                  </View>
-                  <Image
-                    source={require('../assets/images/rain.png')}
-                    resizeMode='contain'
-                    style={styles.image9}
-                  ></Image>
-                </View>
-                <Text style={styles.rainUntilAfternoon}>
-                  Rain until afternoon 75%
-                </Text>
               </View>
             </View>
             <Image
@@ -126,6 +115,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 4,
     left: 28
+  },
+  infoTxt: {
+    fontFamily: 'comicneuebold',
+    color: '#195F57',
+    top: 15,
+    left: 10,
+    width: 220,
+    paddingTop: 5,
+    textAlign: 'justify'
   },
   loremIpsum: {
     fontFamily: 'comicneuebold',
@@ -194,7 +192,7 @@ const styles = StyleSheet.create({
   },
   rect6: {
     width: 238,
-    height: 85,
+    height: 205,
     backgroundColor: 'rgba(255,255,255,1)',
     borderRadius: 27,
     marginTop: 19,
@@ -211,7 +209,7 @@ const styles = StyleSheet.create({
   previousPictures: {
     fontFamily: 'comicneuebold',
     color: '#195F57',
-    fontSize: 14,
+    fontSize: 18,
     marginTop: 9,
     marginLeft: 14
   },

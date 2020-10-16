@@ -21,14 +21,6 @@ class FormLogin extends Component {
     password: ''
   };
 
-  //   componentDidMount() {
-  // const { security } = this.props;
-
-  // if (security.validToken) {
-  //   this.props.navigation.navigate('HomeCutomer');
-  // }
-  //   }
-
   componentDidUpdate(prevProps) {
     if (this.props.security !== prevProps.security) {
       this.props.navigation.navigate('Home');

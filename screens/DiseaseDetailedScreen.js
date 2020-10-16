@@ -1,30 +1,66 @@
 import React, { Component } from 'react';
-
+import _ from 'lodash';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { data } from '../public/diseases';
+
 class DiseaseDetailedScreen extends Component {
+  renderDiseaseName = (_id) => {
+    if (!data.length == 0) {
+      let item = _.filter(data, { id: parseInt(_id) });
+      return <Text>{item[0].name}</Text>;
+    } else {
+      return <Text>No records found</Text>;
+    }
+  };
+
+  renderDescription = (_id) => {
+    if (!data.length == 0) {
+      let item = _.filter(data, { id: parseInt(_id) });
+      return <Text>{item[0].description}</Text>;
+    } else {
+      return <Text>No records found</Text>;
+    }
+  };
+
+  renderDiseaseImage = (_id) => {
+    if (!data.length == 0) {
+      let item = _.filter(data, { id: parseInt(_id) });
+
+      return (
+        <Image
+          source={item[0].image}
+          resizeMode='cover'
+          style={styles.image}
+        ></Image>
+      );
+    } else {
+      return <Text>No image found</Text>;
+    }
+  };
+
   render() {
+    const { id } = this.props.route.params;
+
     return (
       <View style={styles.container}>
         <View style={styles.imageStack}>
-          <Image
-            source={require('../assets/images/example_plant.jpg')}
-            resizeMode='contain'
-            style={styles.image}
-          ></Image>
+          {this.renderDiseaseImage(id)}
           <View style={styles.rect}>
             <View style={styles.amarylissPotatoColumnRow}>
               <View style={styles.amarylissPotatoColumn}>
-                <Text style={styles.amarylissPotato}>Amaryliss Potato</Text>
-                <View style={styles.image3Row}>
+                <Text style={styles.amarylissPotato}>
+                  {this.renderDiseaseName(id)}
+                </Text>
+                {/* <View style={styles.image3Row}>
                   <Image
                     source={require('../assets/images/check.png')}
                     resizeMode='contain'
                     style={styles.image3}
                   ></Image>
                   <Text style={styles.maimoSweden}>Maimo Sweden</Text>
-                </View>
+                </View> */}
               </View>
               <Image
                 source={require('../assets/images/green.png')}
@@ -51,12 +87,7 @@ class DiseaseDetailedScreen extends Component {
             <View style={styles.rect3}>
               <Text style={styles.loremIpsum2}>What is it ?</Text>
               <Text style={styles.loremIpsum1}>
-                Spot of come to ever hand as lady meet on. Delicate contempt
-                received two yet advanced. Gentleman as belonging he commanded
-                believing dejection in by. On no am winding chicken so behaved.
-                Its preserved enjoyment new way behaviour. Him yet devonshire
-                celebrated especially. Unfeeling one provision are smallness
-                resembled repulsive.
+                {this.renderDescription(id)}
               </Text>
             </View>
           </View>
@@ -137,7 +168,7 @@ const styles = StyleSheet.create({
     marginRight: 35
   },
   amarylissPotatoColumn: {
-    width: 159
+    width: 170
   },
   image2: {
     width: 59,

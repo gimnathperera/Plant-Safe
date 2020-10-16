@@ -43,7 +43,6 @@ export const userSignIn = (credentials) => async (dispatch) => {
 export const userSignOut = () => async (dispatch) => {
   try {
     await AsyncStorage.clear();
-    setJWTToken(false);
 
     dispatch({ type: USER_SIGN_OUT });
   } catch (err) {

@@ -8,9 +8,18 @@ import {
   ImageBackground,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
+import { userSignOut } from '../store/actions';
 
 class ProfileScreen extends Component {
+  handleLogout = () => {
+    this.props.navigation.navigate('InitialScreen');
+    this.props.userSignOut();
+  };
+
   render() {
+    const { security } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.image9Stack}>
@@ -29,8 +38,10 @@ class ProfileScreen extends Component {
                   style={styles.image2}
                 ></Image>
                 <View style={styles.bittScottMangetColumn}>
-                  <Text style={styles.bittScottManget}>Bitt Scott Manget</Text>
-                  <Text style={styles.bittGmailCom}>bitt@gmail.com</Text>
+                  <Text style={styles.bittScottManget}>
+                    {security.fullname}
+                  </Text>
+                  <Text style={styles.bittGmailCom}>{security.email}</Text>
                 </View>
               </View>
             </View>
@@ -66,7 +77,7 @@ class ProfileScreen extends Component {
                 ></Image>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.rect4}>
+            <TouchableOpacity style={styles.rect4} onPress={this.handleLogout}>
               <View style={styles.image3Row}>
                 <Image
                   source={require('../assets/images/exit.png')}
@@ -87,8 +98,11 @@ class ProfileScreen extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { security: state.security.user };
+};
 
-export default ProfileScreen;
+export default connect(mapStateToProps, { userSignOut })(ProfileScreen);
 
 const styles = StyleSheet.create({
   container: {

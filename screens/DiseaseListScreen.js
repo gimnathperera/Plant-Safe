@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -9,17 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const DATA = [
-  { id: 1, name: 'Alder', species: 'Alnus' },
-  {
-    id: 2,
-    name: 'Black alder',
-    species: 'Alnus glutinosa, Ilex verticillata'
-  },
-  { id: 3, name: 'Common alder', species: 'Alnus glutinosa' },
-  { id: 4, name: 'False alder', species: 'Ilex verticillata' },
-  { id: 5, name: 'Gray alder', species: 'Alnus incana' }
-];
+import { data } from '../public/diseases';
 
 class DiseaseListScreen extends Component {
   renderPlantDisease = (plant) => {
@@ -27,21 +16,22 @@ class DiseaseListScreen extends Component {
       <TouchableOpacity
         style={styles.rect3}
         onPress={() => {
-          this.props.navigation.navigate('DetailedScreen');
+          this.props.navigation.navigate('DetailedScreen', {
+            id: plant.item.id
+          });
         }}
       >
         <View style={styles.rect6Row}>
           <View style={styles.rect6}>
             <Image
-              source={require('../assets/images/potato.png')}
+              source={plant.item.image}
               resizeMode='cover'
               style={styles.plantImage}
             ></Image>
           </View>
           <View style={styles.potatoEralyBrightColumn}>
-            <Text style={styles.potatoEralyBright}>Potato Eraly Bright</Text>
+            <Text style={styles.potatoEralyBright}>{plant.item.name}</Text>
             <Text style={styles.mangoAppleOrange}>Mango, Apple, Orange</Text>
-            <Text style={styles.fungens}>Fungens</Text>
           </View>
           <Image
             source={require('../assets/images/next.png')}
@@ -60,7 +50,7 @@ class DiseaseListScreen extends Component {
           <View style={styles.rect2}></View>
 
           <FlatList
-            data={DATA}
+            data={data}
             contentContainerStyle={{
               paddingBottom: 100
             }}
@@ -130,14 +120,14 @@ const styles = StyleSheet.create({
     shadowRadius: 10
   },
   rect6: {
-    width: 97,
+    width: 84,
     height: 76,
     backgroundColor: 'green',
     borderRadius: 12
   },
   plantImage: {
     borderRadius: 12,
-    width: 97,
+    width: 84,
     height: 76
   },
   potatoEralyBright: {
