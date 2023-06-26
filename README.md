@@ -11,20 +11,6 @@
 
 🚀 **Tech Stack** - React Native | Convolutional Neural Networks | Flask | MySql <br/>
 
-🚀 **Views** <br/>
-
-<img src="https://i.ibb.co/7Q3HZNg/photo6084492792161218604.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/kqZhWk6/photo6084492792161218603.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/x1j9K91/photo6084492792161218602.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/z4CpFby/photo6084492792161218601.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/GHyHqCL/photo6084492792161218600.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/f0tQrDH/photo6084492792161218599.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/3dDwVTv/photo6084492792161218598.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/gj8qHd3/photo6084492792161218597.jpg" width="23%"></img> 
-<img src="https://i.ibb.co/rt8Nj7s/photo6084492792161218596.jpg" width="23%"></img> 
-
-
-
 
 ## Getting Started
 
